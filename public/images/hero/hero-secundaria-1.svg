@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgSec1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDF3F4"/>
+      <stop offset="100%" stop-color="#F4D5D8"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#bgSec1)"/>
+  
+  <!-- Tarro cosmético -->
+  <g transform="translate(130, 140)">
+    <!-- Tapa -->
+    <rect x="20" y="30" width="200" height="40" rx="10" fill="#731A26"/>
+    <!-- Envase -->
+    <rect x="30" y="70" width="180" height="110" rx="16" fill="#FFFDF7"/>
+    <!-- Etiqueta -->
+    <text x="120" y="130" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="bold" fill="#731A26" text-anchor="middle">alma.</text>
+    <text x="120" y="152" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="#8C827A" text-anchor="middle" letter-spacing="2">MASCARILLA</text>
+  </g>
+
+  <!-- Nota de reemplazo -->
+  <rect x="70" y="420" width="360" height="36" rx="18" fill="#FFFDF7" stroke="#F4D5D8"/>
+  <text x="250" y="443" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="500" fill="#731A26" text-anchor="middle">
+    Tu imagen: /images/hero/hero-secundaria-1.jpg
+  </text>
+</svg>
+

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#FBF8F3"/>
+  <circle cx="250" cy="250" r="140" fill="#FDF3F4" stroke="#F4D5D8" stroke-width="2"/>
+  
+  <!-- Silueta frasco cosmético -->
+  <g transform="translate(175, 130)">
+    <rect x="55" y="20" width="40" height="25" rx="5" fill="#731A26"/>
+    <rect x="50" y="45" width="50" height="15" rx="3" fill="#D4AF37"/>
+    <rect x="25" y="60" width="100" height="170" rx="20" fill="#731A26" opacity="0.85"/>
+    <rect x="35" y="110" width="80" height="80" rx="8" fill="#FFFDF7"/>
+    <text x="75" y="155" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="bold" fill="#731A26" text-anchor="middle">alma.</text>
+  </g>
+</svg>
+

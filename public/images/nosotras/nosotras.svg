@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgNos" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDF3F4"/>
+      <stop offset="50%" stop-color="#F7ECEB"/>
+      <stop offset="100%" stop-color="#EEDCDA"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#bgNos)"/>
+  
+  <!-- Ilustración Silueta Belleza Cotidiana -->
+  <g transform="translate(180, 220)">
+    <circle cx="120" cy="120" r="90" fill="#FFFDF7" opacity="0.6"/>
+    <!-- Icono de flor / hoja botánica -->
+    <path d="M120 40 C70 90, 70 170, 120 220 C170 170, 170 90, 120 40 Z" fill="#731A26" opacity="0.8"/>
+    <path d="M40 120 C90 70, 170 70, 220 120 C170 170, 90 170, 40 120 Z" fill="#F4D5D8" opacity="0.7"/>
+    <circle cx="120" cy="120" r="14" fill="#FFFDF7"/>
+  </g>
+
+  <text x="300" y="520" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-style="italic" font-weight="bold" fill="#731A26" text-anchor="middle">
+    El alma de la marca
+  </text>
+  <text x="300" y="555" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#8C827A" text-anchor="middle">
+    Belleza cotidiana, a tu manera
+  </text>
+
+  <!-- Nota de reemplazo -->
+  <rect x="120" y="680" width="360" height="40" rx="20" fill="#FFFDF7" stroke="#F4D5D8"/>
+  <text x="300" y="705" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="500" fill="#731A26" text-anchor="middle">
+    Tu imagen: /images/nosotras/nosotras.jpg
+  </text>
+</svg>
+

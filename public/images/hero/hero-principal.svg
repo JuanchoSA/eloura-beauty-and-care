@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF8F3"/>
+      <stop offset="50%" stop-color="#F5EBE6"/>
+      <stop offset="100%" stop-color="#EDE2DA"/>
+    </linearGradient>
+    <linearGradient id="bottleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8C3A47"/>
+      <stop offset="50%" stop-color="#A84C5B"/>
+      <stop offset="100%" stop-color="#731A26"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#731A26" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  
+  <!-- Sombra del producto -->
+  <ellipse cx="400" cy="740" rx="140" ry="25" fill="#731A26" opacity="0.08" filter="blur(8px)"/>
+  
+  <!-- Botella de Producto Silueta -->
+  <g filter="url(#shadow)">
+    <!-- Tapa dispensadora -->
+    <rect x="375" y="270" width="50" height="45" rx="6" fill="#D4AF37" opacity="0.85"/>
+    <rect x="360" y="315" width="80" height="20" rx="4" fill="#B38F2D"/>
+    
+    <!-- Cuello de la botella -->
+    <rect x="368" y="335" width="64" height="40" rx="6" fill="url(#bottleGrad)"/>
+    
+    <!-- Cuerpo de la botella -->
+    <rect x="290" y="370" width="220" height="350" rx="40" fill="url(#bottleGrad)"/>
+    
+    <!-- Etiqueta Minimalista Alma -->
+    <rect x="320" y="440" width="160" height="200" rx="12" fill="#FFFDF7" opacity="0.95"/>
+    
+    <!-- Texto en etiqueta -->
+    <text x="400" y="495" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="bold" fill="#731A26" text-anchor="middle" letter-spacing="1">alma.</text>
+    <text x="400" y="525" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#731A26" opacity="0.8" text-anchor="middle" letter-spacing="3">B E L L E Z A</text>
+    
+    <line x1="360" y1="545" x2="440" y2="545" stroke="#F4D5D8" stroke-width="1.5"/>
+    
+    <text x="400" y="580" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-style="italic" fill="#58121B" text-anchor="middle">Ritual Esencial</text>
+    <text x="400" y="605" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#8C827A" text-anchor="middle">Cabello · Cuerpo</text>
+  </g>
+
+  <!-- Indicador sutil para reemplazar imagen -->
+  <g opacity="0.6">
+    <rect x="230" y="870" width="340" height="46" rx="23" fill="#FFFDF7" stroke="#F4D5D8" stroke-width="1.5"/>
+    <text x="400" y="898" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#731A26" text-anchor="middle">
+      Tu imagen: /images/hero/hero-principal.jpg
+    </text>
+  </g>
+</svg>
+
