@@ -7,6 +7,7 @@
       :productos="productos"
       @guardar-producto="handleGuardarProducto"
       @eliminar-producto="handleEliminarProducto"
+      @sincronizar-supabase="handleSincronizarCatalogoSupabase"
       @cerrar-sesion="handleCerrarSesion"
       @volver-tienda="vistaActual = 'tienda'"
     />
@@ -238,10 +239,10 @@
 
               <div class="space-y-4 text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
                 <p>
-                  Alma nace de una idea sencilla: convertir el cuidado diario en un momento propio. Reunimos productos para el cabello, el cuerpo y los sentidos, con una mirada atenta a los pequeños detalles.
+                  Eloura Beauty and Care nace de una idea sencilla: convertir el cuidado diario en un momento propio. Reunimos productos para el cabello, el cuerpo y los sentidos, con una mirada atenta a los pequeños detalles.
                 </p>
                 <p>
-                  Nuestro propósito es ayudarte a elegir con tranquilidad. Sin rutinas imposibles ni promesas extraordinarias: una selección cuidada y una conversación honesta sobre lo que buscas.
+                  Tu cabello cuenta tu historia y merece toda la ternura del mundo. En ELOURA Beauty and Care, elegimos con el corazón cada producto que ponemos a tu alcance, buscando acompañarte en tus días buenos y en los que necesitas un apapacho extra. Queremos ser ese cómplice en tu tocador que te recuerda que cuidar de ti no es un lujo, sino un acto de amor innegociable.
                 </p>
               </div>
 
@@ -348,13 +349,13 @@
             </h2>
           </div>
 
-          <a 
-            href="#contacto" 
-            class="text-xs font-medium text-[#731A26] hover:underline flex items-center gap-1 transition"
+          <button 
+            @click="abrirModalLegal('privacidad')" 
+            class="text-xs font-medium text-[#731A26] hover:underline flex items-center gap-1 transition cursor-pointer"
           >
             <span>Consultar documentación</span>
             <span>↗</span>
-          </a>
+          </button>
         </div>
 
         <!-- 3 Tarjetas de Normativa -->
@@ -387,16 +388,27 @@
           </div>
 
           <!-- Tarjeta 3: Condiciones y privacidad -->
-          <div class="bg-white rounded-2xl border border-[#F4D5D8] p-6 space-y-3 shadow-2xs">
-            <div class="w-8 h-8 rounded-lg bg-[#FDF3F4] text-[#731A26] flex items-center justify-center">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
+          <div class="bg-white rounded-2xl border border-[#F4D5D8] p-6 space-y-3 shadow-2xs flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-[#FDF3F4] text-[#731A26] flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 class="font-serif font-bold text-base text-[#731A26] mt-3">Condiciones y privacidad</h3>
+              <p class="text-xs text-stone-600 font-light leading-relaxed mt-1">
+                Este sitio es un catálogo informativo, sin carrito ni pagos en línea. Precios y disponibilidad se confirman por WhatsApp. No compartas datos sensibles al consultar.
+              </p>
             </div>
-            <h3 class="font-serif font-bold text-base text-[#731A26]">Condiciones y privacidad</h3>
-            <p class="text-xs text-stone-600 font-light leading-relaxed">
-              Este sitio es un catálogo informativo, sin carrito ni pagos en línea. Precios y disponibilidad se confirman por WhatsApp. No compartas datos sensibles al consultar.
-            </p>
+            <div class="pt-2 flex items-center gap-3 text-xs border-t border-[#F4D5D8]/50 mt-2">
+              <button @click="abrirModalLegal('privacidad')" class="text-[#731A26] font-medium hover:underline cursor-pointer">
+                Aviso de Privacidad ↗
+              </button>
+              <span class="text-stone-300">·</span>
+              <button @click="abrirModalLegal('terminos')" class="text-[#731A26] font-medium hover:underline cursor-pointer">
+                Términos ↗
+              </button>
+            </div>
           </div>
 
         </div>
@@ -439,7 +451,7 @@
                 <li><a href="#" class="hover:text-white transition">Inicio</a></li>
                 <li><a href="#catalogo" class="hover:text-white transition">Productos</a></li>
                 <li><a href="#nosotras" class="hover:text-white transition">Nosotras/os</a></li>
-                <li><a href="#marco-legal" class="hover:text-white transition">Marco Legal</a></li>
+                <li><button @click="abrirModalLegal('privacidad')" class="hover:text-white transition cursor-pointer text-left">Marco Legal</button></li>
               </ul>
             </div>
 
@@ -494,12 +506,12 @@
           <!-- Pie de página final -->
           <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-400 font-light">
             <div>
-              &copy; 2026 Eloura · Belleza cotidiana
+              &copy; 2026 Eloura Beauty and Care
             </div>
             <div class="flex flex-wrap items-center justify-center gap-4 text-stone-300">
-              <a href="#" class="hover:text-white transition">Aviso de privacidad</a>
+              <button @click="abrirModalLegal('privacidad')" class="hover:text-white transition cursor-pointer">Aviso de privacidad</button>
               <span>·</span>
-              <a href="#" class="hover:text-white transition">Términos de consulta</a>
+              <button @click="abrirModalLegal('terminos')" class="hover:text-white transition cursor-pointer">Términos de consulta</button>
               <span>·</span>
               <span>Catálogo informativo · Sin pagos en línea</span>
             </div>
@@ -508,6 +520,175 @@
         </div>
       </footer>
 
+    </div>
+
+    <!-- MODAL DE AVISO DE PRIVACIDAD Y TÉRMINOS DE CONSULTA -->
+    <div 
+      v-if="mostrarModalLegal" 
+      class="fixed inset-0 bg-stone-900/50 backdrop-blur-xs flex items-center justify-center p-4 z-50 overflow-y-auto"
+      @click.self="cerrarModalLegal"
+    >
+      <div class="bg-white rounded-3xl max-w-2xl w-full border border-[#F4D5D8] shadow-2xl overflow-hidden my-6 max-h-[90vh] flex flex-col">
+        
+        <!-- Cabecera del Modal -->
+        <div class="px-6 sm:px-8 pt-6 pb-4 border-b border-[#F4D5D8] flex items-center justify-between bg-[#FFFDF7]">
+          <div>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-[#731A26] font-semibold block">
+              Eloura Beauty and Care
+            </span>
+            <h2 class="text-xl sm:text-2xl font-serif font-bold text-[#731A26] mt-0.5">
+              Marco Legal y Normativa
+            </h2>
+          </div>
+          <button 
+            @click="cerrarModalLegal" 
+            class="text-stone-400 hover:text-stone-700 p-2 rounded-xl hover:bg-stone-100 transition cursor-pointer"
+            aria-label="Cerrar modal"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Pestañas de Navegación -->
+        <div class="flex border-b border-[#F4D5D8] bg-[#FDF3F4]/50 px-6 sm:px-8">
+          <button 
+            @click="tabLegalActiva = 'privacidad'"
+            :class="[
+              'py-3.5 px-4 text-xs font-semibold tracking-wide border-b-2 transition cursor-pointer flex items-center gap-2',
+              tabLegalActiva === 'privacidad' 
+                ? 'border-[#731A26] text-[#731A26] bg-white rounded-t-xl -mb-px' 
+                : 'border-transparent text-stone-500 hover:text-stone-800'
+            ]"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            <span>Aviso de Privacidad</span>
+          </button>
+
+          <button 
+            @click="tabLegalActiva = 'terminos'"
+            :class="[
+              'py-3.5 px-4 text-xs font-semibold tracking-wide border-b-2 transition cursor-pointer flex items-center gap-2',
+              tabLegalActiva === 'terminos' 
+                ? 'border-[#731A26] text-[#731A26] bg-white rounded-t-xl -mb-px' 
+                : 'border-transparent text-stone-500 hover:text-stone-800'
+            ]"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>Términos de Consulta</span>
+          </button>
+        </div>
+
+        <!-- Contenido del Modal (Scrollable) -->
+        <div class="p-6 sm:p-8 overflow-y-auto space-y-5 text-stone-700 text-xs sm:text-sm font-light leading-relaxed">
+          
+          <!-- TAB 1: AVISO DE PRIVACIDAD -->
+          <div v-if="tabLegalActiva === 'privacidad'" class="space-y-4">
+            <div class="flex items-center gap-2 pb-2 border-b border-[#F4D5D8]/60">
+              <span class="text-base sm:text-lg font-serif font-bold text-[#731A26]">AVISO DE PRIVACIDAD</span>
+            </div>
+
+            <p class="leading-relaxed">
+              En <strong class="font-semibold text-stone-800">Eloura Beauty an Care.</strong>, respetamos y valoramos la privacidad de nuestros usuarios y clientes. De conformidad con las normativas aplicables sobre protección de datos personales, le informamos que este sitio web opera exclusivamente como un catálogo digital informativo.
+            </p>
+
+            <div class="space-y-3 pt-2">
+              <div class="bg-[#FDF3F4]/40 p-4 rounded-2xl border border-[#F4D5D8]/80">
+                <h4 class="font-semibold text-[#731A26] mb-1 text-xs sm:text-sm">1. Recolección de datos</h4>
+                <p class="text-stone-600">
+                  <strong class="font-medium text-stone-800">Eloura Beauty and Care.</strong> no almacena, recopila ni procesa datos personales, ni información financiera a través de formularios automáticos en este sitio web.
+                </p>
+              </div>
+
+              <div class="bg-[#FDF3F4]/40 p-4 rounded-2xl border border-[#F4D5D8]/80">
+                <h4 class="font-semibold text-[#731A26] mb-1 text-xs sm:text-sm">2. Redirección a WhatsApp</h4>
+                <p class="text-stone-600">
+                  Al hacer clic en el botón <span class="font-medium text-stone-800">"Consultar"</span> o contactarnos a través de los enlaces de WhatsApp integrados, usted será redirigido a una línea de atención directa. Los datos que decida compartir voluntariamente durante dicha conversación (como su nombre, dirección de entrega o detalles de su pedido) serán utilizados únicamente para brindarle asesoría personalizada y gestionar la logística de su solicitud.
+                </p>
+              </div>
+
+              <div class="bg-[#FDF3F4]/40 p-4 rounded-2xl border border-[#F4D5D8]/80">
+                <h4 class="font-semibold text-[#731A26] mb-1 text-xs sm:text-sm">3. Uso de la información</h4>
+                <p class="text-stone-600">
+                  Cualquier dato compartido mediante canales de mensajería privada será tratado de forma confidencial y con el único propósito de concretar su consulta o adquisición de productos. No vendemos ni compartimos sus datos con terceros.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-[#FFFDF7] rounded-xl border border-stone-200 text-stone-600 text-xs mt-3">
+              Si tiene alguna inquietud sobre el tratamiento de su información, puede contactarnos directamente a través de nuestra línea de atención en WhatsApp.
+            </div>
+          </div>
+
+          <!-- TAB 2: TÉRMINOS DE CONSULTA -->
+          <div v-else-if="tabLegalActiva === 'terminos'" class="space-y-4">
+            <div class="flex items-center gap-2 pb-2 border-b border-[#F4D5D8]/60">
+              <span class="text-base sm:text-lg font-serif font-bold text-[#731A26]">TÉRMINOS DE CONSULTA</span>
+            </div>
+
+            <p class="leading-relaxed">
+              Bienvenid@ a <strong class="font-semibold text-stone-800">Eloura.</strong> Al navegar y utilizar nuestro catálogo en línea, aceptas los siguientes términos de consulta:
+            </p>
+
+            <div class="space-y-3 pt-2">
+              <div class="bg-[#FDF3F4]/40 p-4 rounded-2xl border border-[#F4D5D8]/80">
+                <h4 class="font-semibold text-[#731A26] mb-1 text-xs sm:text-sm">1. Carácter informativo</h4>
+                <p class="text-stone-600">
+                  Los productos, imágenes, descripciones y precios mostrados en este sitio web tienen una finalidad meramente informativa y de exhibición para facilitar la elección de nuestros clientes.
+                </p>
+              </div>
+
+              <div class="bg-[#FDF3F4]/40 p-4 rounded-2xl border border-[#F4D5D8]/80">
+                <h4 class="font-semibold text-[#731A26] mb-1 text-xs sm:text-sm">2. Disponibilidad y precios</h4>
+                <p class="text-stone-600">
+                  Los precios expuestos están indicados en pesos colombianos (COP) e incluyen las características generales del producto. <strong class="font-medium text-stone-800">Eloura Beauty and Care.</strong> se reserva el derecho de actualizar o modificar precios, stock y disponibilidad sin previo aviso. La confirmación final del valor y existencias se realizará al momento de su consulta directa por WhatsApp.
+                </p>
+              </div>
+
+              <div class="bg-[#FDF3F4]/40 p-4 rounded-2xl border border-[#F4D5D8]/80">
+                <h4 class="font-semibold text-[#731A26] mb-1 text-xs sm:text-sm">3. Confirmación de solicitudes</h4>
+                <p class="text-stone-600">
+                  La selección de un producto dentro de la plataforma web no constituye una reserva automática ni un contrato de compra formal hasta que una de nuestras asesoras confirme la disponibilidad y acuerde el método de entrega con usted.
+                </p>
+              </div>
+
+              <div class="bg-[#FDF3F4]/40 p-4 rounded-2xl border border-[#F4D5D8]/80">
+                <h4 class="font-semibold text-[#731A26] mb-1 text-xs sm:text-sm">4. Responsabilidad del usuario</h4>
+                <p class="text-stone-600">
+                  El usuario se compromete a realizar consultas de buena fe mediante las líneas oficiales habilitadas en el sitio web.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pie del Modal -->
+        <div class="px-6 sm:px-8 py-4 border-t border-[#F4D5D8] flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#FFFDF7]">
+          <a 
+            :href="whatsappUrlGeneral" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="text-xs text-[#731A26] hover:underline flex items-center gap-1.5 font-medium"
+          >
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.974.532 1.907.828 3.149.828 3.182 0 5.77-2.587 5.77-5.766.001-3.187-2.575-5.67-5.77-5.67zm3.364 8.163c-.144.405-.837.774-1.17.824-.312.045-.698.069-2.253-.574-1.865-.772-3.056-2.678-3.149-2.802-.093-.123-.755-1.004-.755-1.916 0-.911.479-1.359.649-1.534.171-.174.375-.219.5-.219.125 0 .25.002.359.007.115.005.27-.043.422.324.156.377.534 1.303.581 1.399.047.096.078.209.016.333-.063.125-.094.202-.188.312-.093.109-.197.244-.282.328-.094.094-.192.196-.083.383.11.188.487.803 1.045 1.3 0.72 0.64 1.328.84 1.516.933.187.094.297.079.407-.047.11-.125.469-.546.594-.733.125-.188.25-.156.422-.094.172.062 1.094.516 1.281.609.188.094.313.141.359.219.047.078.047.452-.097.857z"/>
+            </svg>
+            <span>¿Tienes dudas? Escríbenos por WhatsApp</span>
+          </a>
+
+          <button 
+            @click="cerrarModalLegal"
+            class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#731A26] hover:bg-[#58121B] text-[#FFFDF7] text-xs font-medium tracking-wide transition shadow-sm cursor-pointer"
+          >
+            Entendido
+          </button>
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -531,6 +712,19 @@ const whatsappUrlGeneral = computed(() => {
 const vistaActual = ref('tienda')
 const usuarioAdmin = ref(null)
 
+// Modal Legal (Aviso de Privacidad y Términos de Consulta)
+const mostrarModalLegal = ref(false)
+const tabLegalActiva = ref('privacidad') // 'privacidad' | 'terminos'
+
+const abrirModalLegal = (tab = 'privacidad') => {
+  tabLegalActiva.value = tab
+  mostrarModalLegal.value = true
+}
+
+const cerrarModalLegal = () => {
+  mostrarModalLegal.value = false
+}
+
 // Datos de Productos
 const productos = ref([])
 const cargando = ref(true)
@@ -546,7 +740,8 @@ const listaCategoriasTabs = [
   { id: 'Perfumes', label: 'Perfumes' },
   { id: 'Exfoliantes', label: 'Exfoliantes' },
   { id: 'Cremas', label: 'Cremas' },
-  { id: 'mas-cuidados', label: 'Más cuidados' }
+  { id: 'Tratamientos', label: 'Tratamientos'},
+  { id: 'Jabones', label: 'Jabones'}
 ]
 
 // Login
@@ -566,7 +761,27 @@ const cargarProductos = async () => {
         .order('created_at', { ascending: false })
 
       if (!error && data && data.length > 0) {
-        productosCargados = data
+        // Combinar con metadatos locales (como badge y presentación) si la tabla en Supabase aún no tiene esas columnas
+        const local = localStorage.getItem('alma_productos')
+        let mapaLocal = {}
+        if (local) {
+          try {
+            JSON.parse(local).forEach(p => {
+              if (p.id) mapaLocal[p.id] = p
+              if (p.nombre) mapaLocal[p.nombre] = p
+            })
+          } catch {}
+        }
+
+        productosCargados = data.map(remoto => {
+          const loc = mapaLocal[remoto.id] || mapaLocal[remoto.nombre] || {}
+          return {
+            ...remoto,
+            badge: (remoto.badge !== undefined && remoto.badge !== null) ? remoto.badge : (loc.badge || null),
+            presentacion: (remoto.presentacion !== undefined && remoto.presentacion !== null) ? remoto.presentacion : (loc.presentacion || null),
+            visible: remoto.visible !== undefined ? remoto.visible : (loc.visible !== false)
+          }
+        })
       }
     } catch (e) {
       console.warn('No se pudo conectar a Supabase, usando almacenamiento local:', e)
@@ -628,7 +843,7 @@ const productosFiltrados = computed(() => {
     if (categoriaSeleccionada.value === 'todos') return true
 
     if (categoriaSeleccionada.value === 'mas-cuidados') {
-      const categoriasPrincipales = ['champú', 'acondicionador', 'perfumes', 'perfume', 'exfoliantes', 'exfoliante', 'cremas', 'crema']
+      const categoriasPrincipales = ['champú', 'acondicionador', 'perfumes', 'perfume', 'exfoliantes', 'exfoliante', 'cremas', 'crema', 'tratamientos', 'jabones']
       return !categoriasPrincipales.includes((p.categoria || '').toLowerCase())
     }
 
@@ -697,89 +912,211 @@ const handleCerrarSesion = async () => {
 }
 
 // Guardar o Editar Producto (con Supabase o Local Storage)
+// Guardar o Editar Producto (con Supabase y actualización en tiempo real)
 const handleGuardarProducto = async ({ producto, archivoImagen, modoEdicion }) => {
   let imagenUrlFinal = producto.imagen_url
 
+  // 1. Subir imagen a Supabase Storage si se seleccionó archivo
   if (archivoImagen && isSupabaseConfigured) {
     try {
       const fileExt = archivoImagen.name.split('.').pop()
-      const fileName = `${Date.now()}.${fileExt}`
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 7)}.${fileExt}`
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('productos-imagenes')
-        .upload(fileName, archivoImagen)
+        .upload(fileName, archivoImagen, {
+          cacheControl: '3600',
+          upsert: true
+        })
 
       if (!uploadError && uploadData) {
         const { data: urlData } = supabase.storage
           .from('productos-imagenes')
           .getPublicUrl(fileName)
         imagenUrlFinal = urlData.publicUrl
+      } else if (uploadError) {
+        console.warn('No se pudo subir a Storage (posiblemente falta crear el bucket):', uploadError.message)
       }
     } catch (e) {
-      console.warn('Fallo al subir a Storage, usando URL local temporal:', e)
-      imagenUrlFinal = URL.createObjectURL(archivoImagen)
+      console.warn('Fallo al subir a Storage:', e)
     }
-  } else if (archivoImagen) {
-    imagenUrlFinal = URL.createObjectURL(archivoImagen)
   }
 
-  const nuevoObjeto = {
-    ...producto,
-    imagen_url: imagenUrlFinal || 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80'
+  // Si no se obtuvo URL de Storage ni imagen previa, usar placeholder
+  if (!imagenUrlFinal) {
+    imagenUrlFinal = '/images/productos/producto-placeholder.svg'
   }
 
+  // 2. Preparar payload para la base de datos
+  const payloadCompleto = {
+    nombre: producto.nombre,
+    descripcion: producto.descripcion,
+    precio: Number(producto.precio),
+    categoria: producto.categoria,
+    imagen_url: imagenUrlFinal,
+    presentacion: producto.presentacion || null,
+    badge: producto.badge || null,
+    visible: producto.visible !== false
+  }
+
+  const payloadBasico = {
+    nombre: producto.nombre,
+    descripcion: producto.descripcion,
+    precio: Number(producto.precio),
+    categoria: producto.categoria,
+    imagen_url: imagenUrlFinal
+  }
+
+  let idFinal = producto.id || Date.now()
+  let guardadoEnSupabase = false
+
+  // 3. Operación en Supabase
   if (isSupabaseConfigured) {
-    try {
-      if (modoEdicion) {
-        await supabase.from('productos').update(nuevoObjeto).eq('id', nuevoObjeto.id)
-      } else {
-        await supabase.from('productos').insert([nuevoObjeto])
+    if (modoEdicion) {
+      // Intentar actualizar con todas las columnas
+      let res = await supabase.from('productos').update(payloadCompleto).eq('id', producto.id).select()
+      
+      // Si faltan columnas como badge/presentacion, reintentar con las básicas
+      if (res.error && res.error.code === 'PGRST204') {
+        res = await supabase.from('productos').update(payloadBasico).eq('id', producto.id).select()
       }
-    } catch (e) {
-      console.warn('Error en base de datos Supabase:', e)
+
+      if (res.error) {
+        console.error('Error al actualizar en Supabase:', res.error)
+        alert('⚠️ No se pudo guardar en Supabase: ' + res.error.message + '\n\nRevisa los permisos RLS en tu panel de Supabase.')
+      } else {
+        guardadoEnSupabase = true
+      }
+    } else {
+      // IMPORTANTE: Para insertar nuevo, no enviar 'id' para que Postgres genere el identificador
+      let res = await supabase.from('productos').insert([payloadCompleto]).select()
+
+      // Si faltan columnas en la tabla, reintentar con payload básico
+      if (res.error && res.error.code === 'PGRST204') {
+        res = await supabase.from('productos').insert([payloadBasico]).select()
+      }
+
+      if (res.error) {
+        console.error('Error al insertar en Supabase:', res.error)
+        if (res.error.code === '42501') {
+          alert('⚠️ Permiso denegado en Supabase (Error RLS 42501):\n\nTu base de datos tiene habilitado Row-Level Security sin políticas de inserción públicas.\n\nPara que se guarde en la nube y se vea en tu teléfono, ejecuta el script SQL en el SQL Editor de tu panel de Supabase.')
+        } else {
+          alert('⚠️ Error al guardar en Supabase: ' + res.error.message)
+        }
+      } else if (res.data && res.data.length > 0) {
+        guardadoEnSupabase = true
+        idFinal = res.data[0].id
+      }
     }
   }
 
-  // Guardar en estado local
+  // 4. Actualizar el estado en la app
+  const itemActualizado = {
+    ...payloadCompleto,
+    id: idFinal,
+    created_at: new Date().toISOString()
+  }
+
   if (modoEdicion) {
-    const idx = productos.value.findIndex(p => p.id === nuevoObjeto.id)
+    const idx = productos.value.findIndex(p => p.id === idFinal)
     if (idx !== -1) {
-      productos.value[idx] = nuevoObjeto
+      productos.value[idx] = itemActualizado
     }
   } else {
-    nuevoObjeto.id = Date.now()
-    nuevoObjeto.created_at = new Date().toISOString()
-    productos.value.unshift(nuevoObjeto)
+    productos.value.unshift(itemActualizado)
   }
 
+  // Guardar copia local de respaldo
   localStorage.setItem('alma_productos', JSON.stringify(productos.value))
+
+  // Si fue exitoso en Supabase, refrescar la lista completa desde la nube
+  if (guardadoEnSupabase) {
+    await cargarProductos()
+  }
 }
 
 // Eliminar Producto
 const handleEliminarProducto = async (id) => {
   if (isSupabaseConfigured) {
-    try {
-      await supabase.from('productos').delete().eq('id', id)
-    } catch (e) {
-      console.warn('Error al eliminar en Supabase:', e)
+    const { error } = await supabase.from('productos').delete().eq('id', id)
+    if (error) {
+      console.error('Error al eliminar en Supabase:', error)
+      alert('⚠️ Error al eliminar en Supabase: ' + error.message)
+      return
     }
   }
 
   productos.value = productos.value.filter(p => p.id !== id)
   localStorage.setItem('alma_productos', JSON.stringify(productos.value))
 }
+
+// Sincronizar catálogo inicial con Supabase
+const handleSincronizarCatalogoSupabase = async () => {
+  if (!isSupabaseConfigured) {
+    alert('Supabase no está configurado en tu archivo .env')
+    return
+  }
+
+  const confirmacion = confirm(
+    '¿Deseas enviar y guardar los productos en la base de datos de Supabase para que estén disponibles en tu teléfono y cualquier otro dispositivo?'
+  )
+  if (!confirmacion) return
+
+  cargando.value = true
+  let guardados = 0
+  let errores = []
+
+  for (const prod of initialProducts) {
+    const payloadCompleto = {
+      nombre: prod.nombre,
+      descripcion: prod.descripcion,
+      precio: prod.precio,
+      categoria: prod.categoria,
+      imagen_url: prod.imagen_url,
+      presentacion: prod.presentacion || null,
+      badge: prod.badge || null,
+      visible: prod.visible !== false
+    }
+
+    const payloadBasico = {
+      nombre: prod.nombre,
+      descripcion: prod.descripcion,
+      precio: prod.precio,
+      categoria: prod.categoria,
+      imagen_url: prod.imagen_url
+    }
+
+    let res = await supabase.from('productos').insert([payloadCompleto]).select()
+    if (res.error && res.error.code === 'PGRST204') {
+      res = await supabase.from('productos').insert([payloadBasico]).select()
+    }
+
+    if (!res.error) {
+      guardados++
+    } else {
+      errores.push(res.error)
+    }
+  }
+
+  cargando.value = false
+
+  if (errores.length > 0) {
+    console.error('Errores al sincronizar con Supabase:', errores)
+    const errRLS = errores.find(e => e.code === '42501')
+    if (errRLS) {
+      alert(
+        '⚠️ Permiso denegado por Row-Level Security (Error 42501):\n\n' +
+        'Tu tabla "productos" en Supabase no tiene una política pública para INSERT.\n\n' +
+        'Ejecuta el script SQL en el editor de Supabase para habilitar lectura y escritura públicas.'
+      )
+    } else {
+      alert('⚠️ Hubo un problema al sincronizar: ' + errores[0].message)
+    }
+  } else {
+    alert(`✅ ¡Éxito! Se sincronizaron ${guardados} productos en Supabase. Ahora ya están guardados en la nube y se verán inmediatamente en tu teléfono.`)
+    await cargarProductos()
+  }
+}
 </script>
-
-<style>
-/* Ocultar scrollbar horizontal en pestañas de categoría sin perder scroll */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>
-
 
 <style>
 /* Ocultar scrollbar horizontal en pestañas de categoría sin perder scroll */

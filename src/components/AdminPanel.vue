@@ -112,13 +112,23 @@
             </p>
           </div>
 
-          <button 
-            @click="abrirModalNuevo"
-            class="bg-[#731A26] hover:bg-[#58121B] text-[#FFFDF7] px-5 py-2.5 rounded-xl text-xs font-medium tracking-wide shadow-sm transition flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
-          >
-            <span class="text-base leading-none font-light">+</span>
-            <span>Agregar Nuevo Producto</span>
-          </button>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button 
+              @click="$emit('sincronizar-supabase')"
+              title="Sincronizar y respaldar los productos en la base de datos de Supabase"
+              class="bg-white hover:bg-[#FDF3F4] text-[#731A26] border border-[#F4D5D8] px-4 py-2.5 rounded-xl text-xs font-medium tracking-wide shadow-2xs transition flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+            >
+              <span>☁️ Sincronizar en la Nube</span>
+            </button>
+
+            <button 
+              @click="abrirModalNuevo"
+              class="bg-[#731A26] hover:bg-[#58121B] text-[#FFFDF7] px-5 py-2.5 rounded-xl text-xs font-medium tracking-wide shadow-sm transition flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+            >
+              <span class="text-base leading-none font-light">+</span>
+              <span>Agregar Nuevo Producto</span>
+            </button>
+          </div>
         </div>
 
         <!-- Tarjetas de Estadísticas (3 Cards) -->
@@ -220,7 +230,15 @@
                         class="w-11 h-11 rounded-lg object-cover border border-[#F4D5D8] bg-[#FFFDF7] shrink-0"
                       />
                       <div>
-                        <div class="font-bold text-[#731A26] text-sm">{{ prod.nombre }}</div>
+                        <div class="font-bold text-[#731A26] text-sm flex items-center gap-1.5">
+                          <span>{{ prod.nombre }}</span>
+                          <span 
+                            v-if="prod.badge"
+                            class="bg-[#731A26] text-[#FFFDF7] text-[9px] font-semibold tracking-wider px-1.5 py-0.5 rounded-sm uppercase"
+                          >
+                            {{ prod.badge }}
+                          </span>
+                        </div>
                         <div class="text-[11px] text-stone-400">{{ prod.presentacion || 'Presentación regular' }}</div>
                       </div>
                     </div>
@@ -439,6 +457,8 @@
                   <option value="Crema">Crema</option>
                   <option value="Aceites">Aceites</option>
                   <option value="Capilares">Capilares</option>
+                  <option value="Tratamientos">Tratamientos</option>
+                  <option value="Jabones">Jabones</option>
                 </select>
               </div>
 
@@ -521,11 +541,11 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['guardar-producto', 'eliminar-producto', 'cerrar-sesion', 'volver-tienda'])
+const emit = defineEmits(['guardar-producto', 'eliminar-producto', 'cerrar-sesion', 'volver-tienda', 'sincronizar-supabase'])
 
 const busqueda = ref('')
 const filtroCategoria = ref('todas')
-const categoriasDisponibles = ['Champú', 'Acondicionador', 'Perfume', 'Exfoliante', 'Crema', 'Aceites', 'Capilares']
+const categoriasDisponibles = ['Champú', 'Acondicionador', 'Perfume', 'Exfoliante', 'Crema', 'Aceites', 'Capilares', 'Tratamientos', 'Jabones']
 
 const mostrarModal = ref(false)
 const modoEdicion = ref(false)

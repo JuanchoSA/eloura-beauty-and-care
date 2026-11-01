@@ -9,7 +9,7 @@
           <!-- Franja superior Blush -->
           <div class="bg-[#FDF3F4] border-b border-[#F4D5D8]/70 px-8 py-5 flex items-center justify-between">
             <div>
-              <span class="text-2xl font-serif font-bold text-[#731A26] tracking-tight block">alma.</span>
+              <span class="text-2xl font-serif font-bold text-[#731A26] tracking-tight block">Eloura.</span>
               <span class="text-[9px] uppercase tracking-[0.25em] text-[#731A26]/80 font-medium">B E L L E Z A &nbsp; C O T I D I A N A</span>
             </div>
             <div class="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-[#731A26] font-semibold bg-white/80 px-3 py-1.5 rounded-full border border-[#F4D5D8]/80">
@@ -27,7 +27,7 @@
                 Iniciar Sesión - Administración
               </h1>
               <p class="text-xs text-stone-600 font-light">
-                Bienvenida de nuevo. Ingresa para cuidar y actualizar el catálogo de Alma.
+                Bienvenida de nuevo. Ingresa para cuidar y actualizar el catálogo de Eloura.
               </p>
             </div>
 
@@ -97,7 +97,7 @@
                 <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                <span>Acceso exclusivo para el equipo de Alma.</span>
+                <span>Acceso exclusivo para el equipo de Eloura.</span>
               </div>
             </form>
           </div>
