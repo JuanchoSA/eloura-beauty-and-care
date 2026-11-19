@@ -703,7 +703,7 @@ import LoginView from './components/LoginView.vue'
 import { initialProducts } from './data/initialProducts'
 import { supabase, isSupabaseConfigured } from './supabase'
 
-const whatsappNumber = ref('573114255527')
+const whatsappNumber = ref('573135442432')
 const whatsappUrlGeneral = computed(() => {
   return `https://wa.me/${whatsappNumber.value}?text=${encodeURIComponent('¡Hola! Me gustaría recibir información y asesoría sobre los productos de Alma.')}`
 })

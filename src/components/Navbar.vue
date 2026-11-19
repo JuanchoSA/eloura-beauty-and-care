@@ -133,7 +133,7 @@ const props = defineProps({
   },
   whatsappNumber: {
     type: String,
-    default: '573114255527'
+    default: '573135442432'
   }
 })
 
