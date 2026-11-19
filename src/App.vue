@@ -891,7 +891,7 @@ const handleLogin = async ({ email, password }) => {
     vistaActual.value = 'admin'
   } else if (email && password) {
     // Si introdujo credenciales pero no coinciden
-    errorLogin.value = 'Credenciales no válidas. Prueba con usuario: admin@alma.com / clave: alma2026'
+    errorLogin.value = 'Credenciales no válidas.'
   } else {
     errorLogin.value = 'Por favor ingresa usuario y contraseña.'
   }
